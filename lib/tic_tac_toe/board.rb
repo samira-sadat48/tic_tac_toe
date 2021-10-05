@@ -5,13 +5,6 @@ module TicTacToe
             @grid = input.fetch(:grid, default_grid)
         end
 
-        private
-
-        def default_grid
-            # 3x3 Grid of Empty Cells
-            Array.new(3) { Array.new(3) { Cell.new } }
-        end
-
         public
 
         def get_cell(x,y)
@@ -26,6 +19,19 @@ module TicTacToe
             return :winner if winner?
             return :draw if draw?
             false
+        end
+
+        def formatted_grid
+            grid.each do |row|
+              puts row.map { |cell| cell.value.empty? ? "_" : cell.value }.join(" ")
+            end
+        end
+
+        private
+
+        def default_grid
+            # 3x3 Grid of Empty Cells
+            Array.new(3) { Array.new(3) { Cell.new } }
         end
 
         def draw?
